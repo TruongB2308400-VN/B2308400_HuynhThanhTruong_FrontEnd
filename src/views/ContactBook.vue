@@ -51,17 +51,19 @@ export default {
     },
     computed: {
         contactStrings() {
-            return this.contacts.map((contact) => {
-                const { name, email, address, phone } = contact;
-                return [name, email, address, phone].join("");
-            });
-        },
+        return this.contacts.map((contact) => {
+            const { name, email, address, phone } = contact;
+            // Chuyển tất cả về chữ thường
+            return [name, email, address, phone].join("").toLowerCase();
+        });
+    },
         filteredContacts() {
-            if (!this.searchText) return this.contacts;
-            return this.contacts.filter((_contact, index) =>
-                this.contactStrings[index].includes(this.searchText)
-            );
-        },
+        if (!this.searchText) return this.contacts;
+        return this.contacts.filter((_contact, index) =>
+            // Chuyển từ khóa tìm kiếm về chữ thường
+            this.contactStrings[index].includes(this.searchText.toLowerCase())
+        );
+    },
         activeContact() {
             if (this.activeIndex < 0) return null;
             return this.filteredContacts[this.activeIndex];

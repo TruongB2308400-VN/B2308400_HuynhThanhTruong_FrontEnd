@@ -17,11 +17,12 @@ export default defineConfig({
   },
   server: {
     port: 3001,
-  },
-  proxy: {
+    // Đưa proxy vào ĐÚNG VỊ TRÍ bên trong khối server này 👇
+    proxy: {
       "/api": {
         target: "http://localhost:3000/",
         changeOrigin: true,
       },
     }
+  } // <--- Đóng ngoặc của server ở đây
 })
